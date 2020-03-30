@@ -8,6 +8,7 @@
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
    <link href="style.css" rel="stylesheet">
+   
 </head>
 
 <body>
@@ -16,8 +17,8 @@
       <div class="container">
          <div class="cart">
             <div class="col-md-12 col-lg-10 mx-auto">
-               <div class="cart-item">
-                  <div class="row">
+               <div class="cart-item" id="p1">
+                  <div class="row" >
                      <div class="col-md-7 center-item">
                         <img src="images/product-1.png" alt="">
                         <h5>iPhone 11 128GB Black</h5>
@@ -25,17 +26,17 @@
 
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button class="btn btn-default"><i class="fa fa-minus" id="m1"></i></button>
+                           <input type="text" class="form-control text-center" id="item1" value="1">
+                           <button class="btn btn-default"><i class="fa fa-plus" id="pl1"></i></button>
                         </div>
-                        <h5>$1219</h5>
-                        <img src="images/remove.png" alt="" class="remove-item">
+                        <h5>$ <span id="iphone">1249</span></h5>
+                        <img src="images/remove.png" alt="" class="remove-item" id="delete">
                      </div>
                   </div>
                </div>
 
-               <div class="cart-item">
+               <div class="cart-item" id="p2">
                   <div class="row">
                      <div class="col-md-7 center-item mx-auto">
                         <img src="images/product-2.png" alt="">
@@ -43,13 +44,12 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input type="text" class="form-control text-center" value="1">
-                           <button class="btn btn-default"><i class="fas fa-plus"></i></button>
-
+                           <button class="btn btn-default"><i class="fa fa-minus" id="m2"></i></button>
+                           <input type="text" class="form-control text-center" id="item2" value="1">
+                           <button class="btn btn-default"><i class="fa fa-plus" id="p2"></i></button>
                         </div>
-                        <h5>$59</h5>
-                        <img src="images/remove.png" alt="" class="remove-item">
+                        <h5>$ <span id="case">59</span> </h5>
+                        <img src="images/remove.png" alt="" class="remove-item" id="delete1">
                      </div>
                   </div>
                </div>
@@ -64,9 +64,9 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$1,278</h5>
+                        <h5>$ <span id="Subtotal">  1,278</span></h5>
                         <h5>$0</h5>
-                        <h5>$1,278</h5>
+                        <h5> $ <span id="grandtotal">  1,278 </span></h5>
                      </div>
                   </div>
                </div>
@@ -77,6 +77,117 @@
          </div>
       </div>
    </section>
+   <script>
+      //remove
+         const removeButton = document.getElementById("delete");
+         removeButton.addEventListener("click", function(){
+         const productArea = document.getElementById("p1");
+         productArea.style.display = "none";
+         })
+         const removeButton2 = document.getElementById("delete1");
+         removeButton2.addEventListener("click", function(){
+         const product2Area = document.getElementById("p2");
+         product2Area.style.display = "none";
+         })
+         //minus1
+         const removeP1 = document.getElementById("m1")
+         removeP1.addEventListener("click", function(){
+            const item1 = document.getElementById("item1");
+            if (item1.value <= 0 && minusvalue <=0) {
+               item1.value = 0;
+               minusvalue = 0;
+            }
+            else{
+               item1.value--;
+            };
+         const iphone = document.getElementById("iphone").innerText;
+         const Iphone = parseFloat(iphone);
+         const minusIphone = Iphone - 1249;
+         document.getElementById("iphone").innerText = minusIphone ;
+         const Subtotal = document.getElementById("Subtotal").innerText;
+         const totalOne = parseFloat(Subtotal);
+         const minusvalue = totalOne - 1249;
+         document.getElementById("Subtotal").innerText = minusvalue ;
+         document.getElementById("grandtotal").innerText = minusvalue;
+
+         })
+         //plus1
+      const fstPLus = document.getElementById("pl1");
+      fstPLus.addEventListener("click", function(){
+         const item1 = document.getElementById("item1").value++;
+         const iphone = document.getElementById("iphone").innerText;
+         const Iphone = parseFloat(iphone);
+         const addIphone = Iphone + 1249;
+         document.getElementById("iphone").innerText = addIphone;
+         const Subtotal = document.getElementById("Subtotal").innerText;
+         const totalOne = parseFloat(Subtotal);
+         const valueTotal = totalOne+1249;
+         document.getElementById("Subtotal").innerText = valueTotal;
+         document.getElementById("grandtotal").innerText = valueTotal;
+      })
+      //plus2
+      const scPLus = document.getElementById("p2");
+      scPLus.addEventListener("click", function(){
+         const item1 = document.getElementById("item2").value++;
+         const iphone = document.getElementById("case").innerText;
+         const Iphone = parseFloat(iphone);
+         const addIphone = Iphone + 59;
+         document.getElementById("case").innerText = addIphone;
+         const Subtotal = document.getElementById("Subtotal").innerText;
+         const totalOne = parseFloat(Subtotal);
+         const valueTotal = totalOne+59;
+         document.getElementById("Subtotal").innerText = valueTotal;
+         document.getElementById("grandtotal").innerText = valueTotal;
+
+      })
+      //minus2
+
+      /* const removeP2 = document.getElementById("m2")
+         removeP2.addEventListener("click", function(){
+           const item2 = document.getElementById("item2");
+           if(item2.value <= 0 && minusvalue <= 0) {
+              item2. value = 0;
+              minusvalue = 0;
+           }
+           else {
+              item2.value-- ;
+           };
+           const case2 = document.getElementById("case").innerText;
+           const case1 = parseFloat(case2);
+           const minuscase1 = case2 - 59;
+           document.getElementById("case").innerText = minuscase1 ;
+           const Subtotal = document.getElementById("Subtotal").innerText;
+           const minusvalue = case1 - 59;
+           document.getElementById("Subtotal").innerText= minusvalue ;
+           document.getElementById("grandtotal").innerText = minusvalue;
+
+         }) */
+         const mninusItem = document.getElementById("m2");
+        mninusItem.addEventListener("click", function() {
+            const item2 = document.getElementById("item2")
+               if (item2.value <= 0 && minusValue <= 0) {
+                  item2.value = 0;
+                  minusValue = 0;
+               } 
+               else {
+                  item2.value--;
+               };
+            const itemOneTotal = document.getElementById("case").innerText;
+            const itemOne = parseFloat(itemOneTotal);
+            const minusItemOne = itemOneTotal - 59;
+            document.getElementById("case").innerText = minusItemOne;
+            const STotal = document.getElementById("Subtotal").innerText;
+            const totalOne = parseFloat(STotal);
+            const minusValue = totalOne - 59;
+            document.getElementById("Subtotal").innerText = minusValue;
+            document.getElementById("grandtotal").innerText = minusValue;
+
+
+        })
+
+
+
+   </script>
 </body>
 
 </html>
