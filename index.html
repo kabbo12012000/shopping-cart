@@ -8,7 +8,6 @@
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" />
    <link href="style.css" rel="stylesheet">
-   
 </head>
 
 <body>
@@ -17,8 +16,8 @@
       <div class="container">
          <div class="cart">
             <div class="col-md-12 col-lg-10 mx-auto">
-               <div class="cart-item" id="p1">
-                  <div class="row" >
+               <div id="p1" class="cart-item">
+                  <div class="row">
                      <div class="col-md-7 center-item">
                         <img src="images/product-1.png" alt="">
                         <h5>iPhone 11 128GB Black</h5>
@@ -26,17 +25,21 @@
 
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fa fa-minus" id="m1"></i></button>
-                           <input type="text" class="form-control text-center" id="item1" value="1">
-                           <button class="btn btn-default"><i class="fa fa-plus" id="pl1"></i></button>
+                           <button id="phone-minus-button" class="btn btn-default">
+                              <i class="fas fa-minus"></i>
+                           </button>
+                           <input  id="phone-cart-no" type="text" class="form-control text-center" value="1" readonly>
+                           <button id="phone-plus-button" class="btn btn-default">
+                              <i class="fas fa-plus"></i>
+                           </button>
                         </div>
-                        <h5>$ <span id="iphone">1249</span></h5>
-                        <img src="images/remove.png" alt="" class="remove-item" id="delete">
+                        <h5>$<span id="phone-cart">1219</span> </h5>
+                        <img src="images/remove.png" alt="" id="delete" class="remove-item">
                      </div>
                   </div>
                </div>
 
-               <div class="cart-item" id="p2">
+               <div id="p2" class="cart-item">
                   <div class="row">
                      <div class="col-md-7 center-item mx-auto">
                         <img src="images/product-2.png" alt="">
@@ -44,12 +47,17 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fa fa-minus" id="m2"></i></button>
-                           <input type="text" class="form-control text-center" id="item2" value="1">
-                           <button class="btn btn-default"><i class="fa fa-plus" id="p2"></i></button>
+                           <button id="case-minus-button" class="btn btn-default">
+                              <i class="fas fa-minus"></i>
+                           </button>
+                           <input id="case-cart-no" type="text" class="form-control text-center" value="1" readonly>
+                           <button id="case-plus-button" class="btn btn-default">
+                              <i class="fas fa-plus"></i>
+                           </button>
+
                         </div>
-                        <h5>$ <span id="case">59</span> </h5>
-                        <img src="images/remove.png" alt="" class="remove-item" id="delete1">
+                        <h5>$ <span id="case-cart">59</span></h5>
+                        <img src="images/remove.png" alt="" id="delete1" class="remove-item">
                      </div>
                   </div>
                </div>
@@ -64,9 +72,9 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5>$ <span id="Subtotal">  1,278</span></h5>
+                        <h5>$ <span id="sub-total">00</span></h5>
                         <h5>$0</h5>
-                        <h5> $ <span id="grandtotal">  1,278 </span></h5>
+                        <h5>$ <span id="total-amount">00</span></h5>
                      </div>
                   </div>
                </div>
@@ -77,9 +85,14 @@
          </div>
       </div>
    </section>
-   <script>
-      //remove
-         const removeButton = document.getElementById("delete");
+
+   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+<script>
+   //delete
+   const removeButton = document.getElementById("delete");
          removeButton.addEventListener("click", function(){
          const productArea = document.getElementById("p1");
          productArea.style.display = "none";
@@ -89,105 +102,86 @@
          const product2Area = document.getElementById("p2");
          product2Area.style.display = "none";
          })
-         //minus1
-         const removeP1 = document.getElementById("m1")
-         removeP1.addEventListener("click", function(){
-            const item1 = document.getElementById("item1");
-            if (item1.value <= 0 && minusvalue <=0) {
-               item1.value = 0;
-               minusvalue = 0;
-            }
-            else{
-               item1.value--;
-            };
-         const iphone = document.getElementById("iphone").innerText;
-         const Iphone = parseFloat(iphone);
-         const minusIphone = Iphone - 1249;
-         document.getElementById("iphone").innerText = minusIphone ;
-         const Subtotal = document.getElementById("Subtotal").innerText;
-         const totalOne = parseFloat(Subtotal);
-         const minusvalue = totalOne - 1249;
-         document.getElementById("Subtotal").innerText = minusvalue ;
-         document.getElementById("grandtotal").innerText = minusvalue;
+   //Phone plus Button Event handler
+   const phonePlusButtonCheck = document.getElementById("phone-plus-button");
+   phonePlusButtonCheck.addEventListener("click", function(){
+      phoneTextUpdate("phone-cart-no",1);
+      const phoneCart = phoneCartUpdate("phone-cart", 1219);
 
-         })
-         //plus1
-      const fstPLus = document.getElementById("pl1");
-      fstPLus.addEventListener("click", function(){
-         const item1 = document.getElementById("item1").value++;
-         const iphone = document.getElementById("iphone").innerText;
-         const Iphone = parseFloat(iphone);
-         const addIphone = Iphone + 1249;
-         document.getElementById("iphone").innerText = addIphone;
-         const Subtotal = document.getElementById("Subtotal").innerText;
-         const totalOne = parseFloat(Subtotal);
-         const valueTotal = totalOne+1249;
-         document.getElementById("Subtotal").innerText = valueTotal;
-         document.getElementById("grandtotal").innerText = valueTotal;
-      })
-      //plus2
-      const scPLus = document.getElementById("p2");
-      scPLus.addEventListener("click", function(){
-         const item1 = document.getElementById("item2").value++;
-         const iphone = document.getElementById("case").innerText;
-         const Iphone = parseFloat(iphone);
-         const addIphone = Iphone + 59;
-         document.getElementById("case").innerText = addIphone;
-         const Subtotal = document.getElementById("Subtotal").innerText;
-         const totalOne = parseFloat(Subtotal);
-         const valueTotal = totalOne+59;
-         document.getElementById("Subtotal").innerText = valueTotal;
-         document.getElementById("grandtotal").innerText = valueTotal;
+      const caseCart = document.getElementById("case-cart").innerText;
+      const caseCartNumber = parseFloat(caseCart);
+      document.getElementById("sub-total").innerText = phoneCaseUpdate(phoneCart,caseCartNumber);
 
-      })
-      //minus2
+      finalAmountCheck("total-amount", "sub-total");
+   })
+   //Case plus Button Event handler
+   const casePlusButtonCheck = document.getElementById("case-plus-button");
+   casePlusButtonCheck.addEventListener("click", function(){
+      phoneTextUpdate("case-cart-no",1);
+      const caseCart = phoneCartUpdate("case-cart", 59);
+      
+      const phoneCart = document.getElementById("phone-cart").innerText;
+      const phoneCartNumber = parseFloat(phoneCart);
+      document.getElementById("sub-total").innerText = phoneCaseUpdate(caseCart,phoneCartNumber);
 
-      /* const removeP2 = document.getElementById("m2")
-         removeP2.addEventListener("click", function(){
-           const item2 = document.getElementById("item2");
-           if(item2.value <= 0 && minusvalue <= 0) {
-              item2. value = 0;
-              minusvalue = 0;
-           }
-           else {
-              item2.value-- ;
-           };
-           const case2 = document.getElementById("case").innerText;
-           const case1 = parseFloat(case2);
-           const minuscase1 = case2 - 59;
-           document.getElementById("case").innerText = minuscase1 ;
-           const Subtotal = document.getElementById("Subtotal").innerText;
-           const minusvalue = case1 - 59;
-           document.getElementById("Subtotal").innerText= minusvalue ;
-           document.getElementById("grandtotal").innerText = minusvalue;
+      finalAmountCheck("total-amount", "sub-total");
 
-         }) */
-         const mninusItem = document.getElementById("m2");
-        mninusItem.addEventListener("click", function() {
-            const item2 = document.getElementById("item2")
-               if (item2.value <= 0 && minusValue <= 0) {
-                  item2.value = 0;
-                  minusValue = 0;
-               } 
-               else {
-                  item2.value--;
-               };
-            const itemOneTotal = document.getElementById("case").innerText;
-            const itemOne = parseFloat(itemOneTotal);
-            const minusItemOne = itemOneTotal - 59;
-            document.getElementById("case").innerText = minusItemOne;
-            const STotal = document.getElementById("Subtotal").innerText;
-            const totalOne = parseFloat(STotal);
-            const minusValue = totalOne - 59;
-            document.getElementById("Subtotal").innerText = minusValue;
-            document.getElementById("grandtotal").innerText = minusValue;
+   })
+   //Phone minus Button Event handler
+   const phoneMinusButtonCheck = document.getElementById("phone-minus-button");
+      phoneMinusButtonCheck.addEventListener("click", function(){
+      phoneTextUpdate("phone-cart-no",-1);
+      const phoneCart = phoneCartUpdate("phone-cart", -1219);
 
+      const caseCart = document.getElementById("case-cart").innerText;
+      const caseCartNumber = parseFloat(caseCart);
+      document.getElementById("sub-total").innerText = phoneCaseUpdate(phoneCart,caseCartNumber);
 
-        })
+      finalAmountCheck("total-amount", "sub-total");
+           
+   }) 
 
+   //Case Minus Button Event handler
+   const caseMinusButtonCheck = document.getElementById("case-minus-button");
+   caseMinusButtonCheck.addEventListener("click", function(){
+      phoneTextUpdate("case-cart-no",-1);
+      const caseCart = phoneCartUpdate("case-cart", -59);
 
+      const phoneCart = document.getElementById("phone-cart").innerText;
+      const phoneCartNumber = parseFloat(phoneCart);
+      document.getElementById("sub-total").innerText = phoneCaseUpdate(caseCart,phoneCartNumber);
 
-   </script>
-</body>
+      finalAmountCheck("total-amount", "sub-total");
+   })
+   function phoneTextUpdate(id, givenNumber){
+      const getNumber = document.getElementById(id).value;
+      const getNumberDigit = parseFloat(getNumber); 
+      const totalAmount = getNumberDigit + givenNumber;
+      if(totalAmount>=0){
+         document.getElementById(id).value = totalAmount;
+         return totalAmount;
+      }else return 0;   
+       }
+   function phoneCartUpdate(id, givenNumber){
+      const getNumber = document.getElementById(id).innerText;
+      const getNumberDigit = parseFloat(getNumber);
+         const totalAmount = getNumberDigit + givenNumber;
+         if(totalAmount>=0){
+            document.getElementById(id).innerText = totalAmount;
+            return totalAmount;
+         }else return 0;
+         
+        
+   }
+   function phoneCaseUpdate(firstNumber, secondNumber){
+      const totalAmount = firstNumber + secondNumber;
+      return totalAmount;
+
+   }
+   function finalAmountCheck(firstId, secondId){
+       document.getElementById(firstId).innerText = document.getElementById(secondId).innerText;
+      
+   }
+</script>
 
 </html>
